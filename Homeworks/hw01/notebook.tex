@@ -1,0 +1,1367 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Data-X HW1 Sp18}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{homework-1}{%
+\section{Homework 1}\label{homework-1}}
+
+    In this homework, you will get a chance to do some exercises with Numpy,
+Pandas, and Matplotlib to show us your understanding with this
+libraries.
+
+If you have questions, Google! Additionally you can ask your peers
+questions on Piazza and/or go to Office Hours.
+
+This homework is due \textbf{Thursday Feb.~8th, 2018 at 11:59 PM}.
+Please upload your .ipynb to your private repo on Github. Additionally,
+submit a pdf on bCourses and in the comment section include a link to
+your private repo.
+
+This homework is long, please start early!
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ImportError                               Traceback (most recent call last)
+
+        <ipython-input-43-105e9e7a0fde> in <module>()
+    ----> 1 from math import mul
+          2 import numpy as np
+          3 import pandas as pd
+          4 import matplotlib.pyplot as plt
+          5 get\_ipython().run\_line\_magic('matplotlib', 'inline')
+
+
+        ImportError: cannot import name 'mul'
+
+    \end{Verbatim}
+
+    \hypertarget{numpy-basics}{%
+\subsection{NumPy Basics}\label{numpy-basics}}
+
+    Create two numpy arrays (\texttt{a} and \texttt{b}). \texttt{a} should
+be all integers between 10-19 (inclusive), and \texttt{b} should be ten
+evenly spaced numbers between 1-7. Print the results below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{19}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{b}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a:  [10 11 12 13 14 15 16 17 18]
+b:  [1.         1.66666667 2.33333333 3.         3.66666667 4.33333333
+ 5.         5.66666667 6.33333333 7.        ]
+
+    \end{Verbatim}
+
+    For \texttt{a} and \texttt{b} above do the follow and print out the
+results.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Square all the elements in both arrays (element-wise).\\
+\item
+  Add both the squared arrays (e.g. {[}1,2{]} + {[}3,4{]} =
+  {[}4,6{]}).\\
+\item
+  Sum the elements with even indices of the added array.\\
+\item
+  Take the square root of the added array (element-wise square root).
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{sq\PYZus{}a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+         \PY{n}{sq\PYZus{}b} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{square}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+         \PY{n}{sum\PYZus{}ab} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{sq\PYZus{}a}\PY{p}{,} \PY{n}{sq\PYZus{}b}\PY{p}{)}
+         \PY{n}{even\PYZus{}total} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sum\PYZus{}ab}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{i}\PY{o}{\PYZpc{}}\PY{k}{2} == 0:
+                 \PY{n}{even\PYZus{}total} \PY{o}{+}\PY{o}{=} \PY{n}{sum\PYZus{}ab}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+         \PY{n}{sqrt\PYZus{}ab} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{sum\PYZus{}ab}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1. }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sq\PYZus{}a}\PY{p}{,} \PY{n}{sq\PYZus{}b} \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2. }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sum\PYZus{}ab}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{3. }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{even\PYZus{}total}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{4. }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sqrt\PYZus{}ab}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.  [100. 121. 144. 169. 196. 225. 256. 289. 324. 361.] [ 1.          2.77777778  5.44444444  9.         13.44444444 18.77777778
+ 25.         32.11111111 40.11111111 49.        ]
+2.  [101.         123.77777778 149.44444444 178.         209.44444444
+ 243.77777778 281.         321.11111111 364.11111111 410.        ]
+3.  1105.0
+4.  [10.04987562 11.12554618 12.22474721 13.34166406 14.47219556 15.61338457
+ 16.76305461 17.91957341 19.08169571 20.24845673]
+
+    \end{Verbatim}
+
+    Append \texttt{b} to \texttt{a}. Reshape the appended array so that it
+is a 5x4, 2D-array and store the results in a variable called
+\texttt{m}. Print \texttt{m}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{m: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{m}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+m:  [[10.         11.         12.         13.        ]
+ [14.         15.         16.         17.        ]
+ [18.         19.          1.          1.66666667]
+ [ 2.33333333  3.          3.66666667  4.33333333]
+ [ 5.          5.66666667  6.33333333  7.        ]]
+
+    \end{Verbatim}
+
+    Extract the second and the third column of the matrix \texttt{m}. Store
+the resulting 5x2 matrix in a new variable called \texttt{m2}. Print
+\texttt{m2}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{m2} \PY{o}{=} \PY{n}{m}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{m2: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{m2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+m2:  [[11.         12.        ]
+ [15.         16.        ]
+ [19.          1.        ]
+ [ 3.          3.66666667]
+ [ 5.66666667  6.33333333]]
+
+    \end{Verbatim}
+
+    Take the dot product of \texttt{m2} and \texttt{m} store the results in
+a matrix called \texttt{m3}. Print \texttt{m3}. Note that dot product of
+two matrices \(A\cdot B = A^T B\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{m3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{m2}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{m}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{m3: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{m3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+m3:  [[697.33333333 748.11111111 437.88888889 482.33333333]
+ [402.22222222 437.88888889 454.55555556 489.88888889]]
+
+    \end{Verbatim}
+
+    Round the \texttt{m3} matrix to two decimal points. Store the result in
+place and print the new \texttt{m3}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n}{m3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{m3}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{m3: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{m3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+m3:  [[697.33 748.11 437.89 482.33]
+ [402.22 437.89 454.56 489.89]]
+
+    \end{Verbatim}
+
+    Sort the \texttt{m3} array so that the highest value is at the top left,
+the next highest value to the right of the highest, and the lowest value
+is at the bottom right. Print the sorted \texttt{m3} array.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{sorted\PYZus{}m3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{m3}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sorted m3: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sorted\PYZus{}m3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+sorted m3:  [[437.89 482.33 697.33 748.11]
+ [402.22 437.89 454.56 489.89]]
+
+    \end{Verbatim}
+
+    \hypertarget{numpy-and-masks}{%
+\subsection{NumPy and Masks}\label{numpy-and-masks}}
+
+    Create an array called \texttt{f} where there are 100 equally-spaced
+values from 0 to pi, inclusive. Take the sin of the array \texttt{f}
+(element-wise) and store that in place. Print \texttt{f}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{f} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{math}\PY{o}{.}\PY{n}{pi}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n}{f} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{f: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+f:  [0.00000000e+00 3.17279335e-02 6.34239197e-02 9.50560433e-02
+ 1.26592454e-01 1.58001396e-01 1.89251244e-01 2.20310533e-01
+ 2.51147987e-01 2.81732557e-01 3.12033446e-01 3.42020143e-01
+ 3.71662456e-01 4.00930535e-01 4.29794912e-01 4.58226522e-01
+ 4.86196736e-01 5.13677392e-01 5.40640817e-01 5.67059864e-01
+ 5.92907929e-01 6.18158986e-01 6.42787610e-01 6.66769001e-01
+ 6.90079011e-01 7.12694171e-01 7.34591709e-01 7.55749574e-01
+ 7.76146464e-01 7.95761841e-01 8.14575952e-01 8.32569855e-01
+ 8.49725430e-01 8.66025404e-01 8.81453363e-01 8.95993774e-01
+ 9.09631995e-01 9.22354294e-01 9.34147860e-01 9.45000819e-01
+ 9.54902241e-01 9.63842159e-01 9.71811568e-01 9.78802446e-01
+ 9.84807753e-01 9.89821442e-01 9.93838464e-01 9.96854776e-01
+ 9.98867339e-01 9.99874128e-01 9.99874128e-01 9.98867339e-01
+ 9.96854776e-01 9.93838464e-01 9.89821442e-01 9.84807753e-01
+ 9.78802446e-01 9.71811568e-01 9.63842159e-01 9.54902241e-01
+ 9.45000819e-01 9.34147860e-01 9.22354294e-01 9.09631995e-01
+ 8.95993774e-01 8.81453363e-01 8.66025404e-01 8.49725430e-01
+ 8.32569855e-01 8.14575952e-01 7.95761841e-01 7.76146464e-01
+ 7.55749574e-01 7.34591709e-01 7.12694171e-01 6.90079011e-01
+ 6.66769001e-01 6.42787610e-01 6.18158986e-01 5.92907929e-01
+ 5.67059864e-01 5.40640817e-01 5.13677392e-01 4.86196736e-01
+ 4.58226522e-01 4.29794912e-01 4.00930535e-01 3.71662456e-01
+ 3.42020143e-01 3.12033446e-01 2.81732557e-01 2.51147987e-01
+ 2.20310533e-01 1.89251244e-01 1.58001396e-01 1.26592454e-01
+ 9.50560433e-02 6.34239197e-02 3.17279335e-02 1.22464680e-16]
+
+    \end{Verbatim}
+
+    Use a `mask' and print an array that is True when \texttt{f}
+\textgreater{}= 1/2 and False when \texttt{f} \textless{} 1/2. Print an
+array sequence that has only those values where \texttt{f}
+\textgreater{}= 1/2.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{m} \PY{o}{=} \PY{p}{[}\PY{n}{elem} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mf}{0.5} \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{f}\PY{p}{]}
+         \PY{n}{f}\PY{p}{[}\PY{n}{m}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}80}]:} array([0.51367739, 0.54064082, 0.56705986, 0.59290793, 0.61815899,
+                0.64278761, 0.666769  , 0.69007901, 0.71269417, 0.73459171,
+                0.75574957, 0.77614646, 0.79576184, 0.81457595, 0.83256985,
+                0.84972543, 0.8660254 , 0.88145336, 0.89599377, 0.909632  ,
+                0.92235429, 0.93414786, 0.94500082, 0.95490224, 0.96384216,
+                0.97181157, 0.97880245, 0.98480775, 0.98982144, 0.99383846,
+                0.99685478, 0.99886734, 0.99987413, 0.99987413, 0.99886734,
+                0.99685478, 0.99383846, 0.98982144, 0.98480775, 0.97880245,
+                0.97181157, 0.96384216, 0.95490224, 0.94500082, 0.93414786,
+                0.92235429, 0.909632  , 0.89599377, 0.88145336, 0.8660254 ,
+                0.84972543, 0.83256985, 0.81457595, 0.79576184, 0.77614646,
+                0.75574957, 0.73459171, 0.71269417, 0.69007901, 0.666769  ,
+                0.64278761, 0.61815899, 0.59290793, 0.56705986, 0.54064082,
+                0.51367739])
+\end{Verbatim}
+            
+    \hypertarget{numpy-and-2-variable-prediction}{%
+\subsection{NumPy and 2 Variable
+Prediction}\label{numpy-and-2-variable-prediction}}
+
+    Let \texttt{x} be the number of miles a person drives per day and
+\texttt{y} be the dollars spent on buying car fuel per day.
+
+We have created 2 numpy arrays each of size 100 that represent
+\texttt{x} and \texttt{y}.\\
+\texttt{x} (number of miles) ranges from 1 to 10 with a uniform noise of
+(0, 1/2).\\
+\texttt{y} (money spent in dollars) will be from 1 to 20 with a uniform
+noise (0, 1).
+
+Run the cell below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{c+c1}{\PYZsh{} seed the random number generator with a fixed value}
+         \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{500}\PY{p}{)}
+         
+         \PY{n}{x}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{low}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{high}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)} 
+         \PY{n}{y}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{low}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{high}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{size}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{x}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y= }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+x =  [ 1.34683976  1.12176759  1.51512398  1.55233174  1.40619168  1.65075498
+  1.79399331  1.80243817  1.89844195  2.00100023  2.3344038   2.22424872
+  2.24914511  2.36268477  2.49808849  2.8212704   2.68452475  2.68229427
+  3.09511169  2.95703884  3.09047742  3.2544361   3.41541904  3.40886375
+  3.50672677  3.74960644  3.64861355  3.7721462   3.56368566  4.01092701
+  4.15630694  4.06088549  4.02517179  4.25169402  4.15897504  4.26835333
+  4.32520644  4.48563164  4.78490721  4.84614839  4.96698768  5.18754259
+  5.29582013  5.32097781  5.0674106   5.47601124  5.46852704  5.64537452
+  5.49642807  5.89755027  5.68548923  5.76276141  5.94613234  6.18135713
+  5.96522091  6.0275473   6.54290191  6.4991329   6.74003765  6.81809807
+  6.50611821  6.91538752  7.01250925  6.89905417  7.31314433  7.20472297
+  7.1043621   7.48199528  7.58957227  7.61744354  7.6991707   7.85436822
+  8.03510784  7.80787781  8.22410224  7.99366248  8.40581097  8.28913792
+  8.45971515  8.54227144  8.6906456   8.61856507  8.83489887  8.66309658
+  8.94837987  9.20890222  8.9614749   8.92608294  9.13231416  9.55889896
+  9.61488451  9.54252979  9.42015491  9.90952569 10.00659591 10.02504265
+ 10.07330937  9.93489915 10.0892334  10.36509991]
+y=  [ 1.6635012   2.0214592   2.10816052  2.26016496  1.96287558  2.9554635
+  3.02881887  3.33565296  2.75465779  3.4250107   3.39670148  3.39377767
+  3.78503343  4.38293049  4.32963586  4.03925039  4.73691868  4.30098399
+  4.8416329   4.78175957  4.99765787  5.31746817  5.76844671  5.93723749
+  5.72811642  6.70973615  6.68143367  6.57482731  7.17737603  7.54863252
+  7.30221419  7.3202573   7.78023884  7.91133365  8.2765417   8.69203281
+  8.78219865  8.45897546  8.89094715  8.81719921  8.87106971  9.66192562
+  9.4020625   9.85990783  9.60359778 10.07386266 10.6957995  10.66721916
+ 11.18256285 10.57431836 11.46744716 10.94398916 11.26445259 12.09754828
+ 12.11988037 12.121557   12.17613693 12.43750193 13.00912372 12.86407194
+ 13.24640866 12.76120085 13.11723062 14.07841099 14.19821707 14.27289001
+ 14.30624942 14.63060835 14.2770918  15.0744923  14.45261619 15.11897313
+ 15.2378667  15.27203124 15.32491892 16.01095271 15.71250558 16.29488506
+ 16.70618934 16.56555394 16.42379457 17.18144744 17.13813976 17.69613625
+ 17.37763019 17.90942839 17.90343733 18.01951169 18.35727914 18.16841269
+ 18.61813748 18.66062754 18.81217983 19.44995194 19.7213867  19.71966726
+ 19.78961904 19.64385088 20.69719809 20.07974319]
+
+    \end{Verbatim}
+
+    Find the expected value of \texttt{x} and the expected value of
+\texttt{y}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{n}{ex\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{ex\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+         
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{expected value of x = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ex\PYZus{}x}\PY{p}{)}
+         \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{expected value of y = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ex\PYZus{}y}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+expected value of x =  5.782532541587923
+expected value of y =  11.012981683344968
+
+    \end{Verbatim}
+
+    Find the variance for \texttt{x} and \texttt{y}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{var\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{var\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{var}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+        
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Variance of x = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ex\PYZus{}x}\PY{p}{)}
+        \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Variance of y = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ex\PYZus{}y}\PY{p}{)}
+\end{Verbatim}
+
+
+    Find the co-variance of \texttt{x} and \texttt{y}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{cov\PYZus{}xy} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{cov}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Covariance of x and y = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cov\PYZus{}xy}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Covariance of x and y =  [[ 7.10437124 14.65774383]
+ [14.65774383 30.41808442]]
+
+    \end{Verbatim}
+
+    Assume that the number of dollars spent on car fuel is only linearly
+dependent on the miles driven. Write code that uses a linear predictor
+to calculate a predicted value of \texttt{y} for each \texttt{x}.
+
+i.e. \(y_{predicted} = f(x) = mx + b.\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{x}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+         \PY{n}{result} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{lstsq}\PY{p}{(}\PY{n}{A}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{rcond}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+         \PY{n}{m}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{n}{result}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{n}{y\PYZus{}predicted} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{m}\PY{p}{)} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x + }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}predicted}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+2.063200715971325x + -0.9175435965867224
+
+    \end{Verbatim}
+
+    Predict \texttt{y} for each value in \texttt{x}, put the error into an
+array called \(y_{error}\).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{predict} \PY{o}{=} \PY{n}{m}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{b}
+         \PY{n}{y\PYZus{}error} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{predict}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{y\PYZus{}error}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[-0.19775597  0.62457111 -0.10030076 -0.02506341 -0.02083649  0.46716823
+  0.24499418  0.53440482 -0.24466541  0.21408918 -0.50209852 -0.27775029
+  0.06213923  0.42578118  0.0931215  -0.86405311  0.1157489  -0.31558388
+ -0.62666017 -0.40166149 -0.46107377 -0.47954311 -0.3607047  -0.17838904
+ -0.58942116 -0.10891094  0.07115518 -0.29032384  0.74232081  0.19082863
+ -0.35553767 -0.14062095  0.39304511  0.0567791   0.61328502  0.80310676
+  0.77597321  0.12176065 -0.06373323 -0.26383402 -0.45927925 -0.12347238
+ -0.60673379 -0.20079382  0.0660562  -0.30670405  0.33067419 -0.062778
+  0.75987212 -0.67596798  0.65468531 -0.02820071 -0.08606832  0.26171143
+  0.72997592  0.60306068 -0.40563939 -0.05397013  0.02061681 -0.28548928
+  0.7405245  -0.58908804 -0.43343988  0.76182107  0.02727604  0.32564401
+  0.56606805  0.11129392 -0.46417555  0.27572093 -0.5147747  -0.16862142
+ -0.42262995  0.08035574 -0.72551112  0.43596616 -0.71282602  0.11027337
+  0.16964259 -0.14132301 -0.58920807  0.31716141 -0.17248631  0.73997278
+ -0.16712997 -0.17284167  0.33165948  0.52075457  0.43302563 -0.6359709
+ -0.30175553 -0.10998314  0.29405306 -0.07784496 -0.00668554 -0.04646431
+ -0.07609646  0.06370343  0.79862812 -0.38799477]
+
+    \end{Verbatim}
+
+    Write code that calculates the root mean square error (RMSE).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{rmse} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{y\PYZus{}error}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RSME:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{rmse}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+RSME: 4.176777236685611
+
+    \end{Verbatim}
+
+    \hypertarget{pandas}{%
+\subsection{Pandas}\label{pandas}}
+
+    \hypertarget{reading-a-file}{%
+\subsubsection{Reading a File}\label{reading-a-file}}
+
+    Read in a CSV file called `data3.csv' into a dataframe called df.
+
+Data description * Data source:
+http://www.fao.org/nr/water/aquastat/data/query/index.html * Data, units
+* GDP, current USD (CPI adjusted) * NRI, mm/yr * Population density,
+inhab/km\^{}2 * Total area of the country, 1000 ha = 10km\^{}2 * Total
+Population, unit 1000 inhabitants
+
+Display the first 10 lines of the dataframe.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data3.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:}         Area  Area Id              Variable Name  Variable Id    Year  \textbackslash{}
+         0  Argentina      9.0  Total area of the country       4100.0  1962.0   
+         1  Argentina      9.0  Total area of the country       4100.0  1967.0   
+         2  Argentina      9.0  Total area of the country       4100.0  1972.0   
+         3  Argentina      9.0  Total area of the country       4100.0  1977.0   
+         4  Argentina      9.0  Total area of the country       4100.0  1982.0   
+         5  Argentina      9.0  Total area of the country       4100.0  1987.0   
+         6  Argentina      9.0  Total area of the country       4100.0  1992.0   
+         7  Argentina      9.0  Total area of the country       4100.0  1997.0   
+         8  Argentina      9.0  Total area of the country       4100.0  2002.0   
+         9  Argentina      9.0  Total area of the country       4100.0  2007.0   
+         
+               Value Symbol  Md  
+         0  278040.0      E NaN  
+         1  278040.0      E NaN  
+         2  278040.0      E NaN  
+         3  278040.0      E NaN  
+         4  278040.0      E NaN  
+         5  278040.0      E NaN  
+         6  278040.0      E NaN  
+         7  278040.0      E NaN  
+         8  278040.0      E NaN  
+         9  278040.0      E NaN  
+\end{Verbatim}
+            
+    Display the column names.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{columns}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Index(['Area', 'Area Id', 'Variable Name', 'Variable Id', 'Year', 'Value',
+       'Symbol', 'Md'],
+      dtype='object')
+
+    \end{Verbatim}
+
+    \hypertarget{data-preprocessing}{%
+\subsubsection{Data Preprocessing}\label{data-preprocessing}}
+
+    Create a mask of NAN values (i.e.~apply \texttt{.isnull} on the
+dataframe). Inspect the mask for `True' values, they denote NANs.\\
+\emph{Hint: You will notice that the last 8 rows and the last column
+(`Other') have NAN values. You can also use df.tail() to see the last
+row.}
+
+Remove the bottom 8 rows from the dataframe because they contain NAN
+values. Also remove the column `Other'.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Md}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{]}
+\end{Verbatim}
+
+
+    All the columns in our dataframe are not required for analysis. Drop
+these columns: \texttt{Area\ Id}, \texttt{Variable\ Id}, and
+\texttt{Symbol} and save the new dataframe as \texttt{df1}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{df1} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area Id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Variable Id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Symbol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Md}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{df1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}99}]:}                          Area                  Variable Name    Year  \textbackslash{}
+         0                   Argentina      Total area of the country  1962.0   
+         1                   Argentina      Total area of the country  1967.0   
+         2                   Argentina      Total area of the country  1972.0   
+         3                   Argentina      Total area of the country  1977.0   
+         4                   Argentina      Total area of the country  1982.0   
+         5                   Argentina      Total area of the country  1987.0   
+         6                   Argentina      Total area of the country  1992.0   
+         7                   Argentina      Total area of the country  1997.0   
+         8                   Argentina      Total area of the country  2002.0   
+         9                   Argentina      Total area of the country  2007.0   
+         10                  Argentina      Total area of the country  2012.0   
+         11                  Argentina      Total area of the country  2014.0   
+         12                  Argentina               Total population  1962.0   
+         13                  Argentina               Total population  1967.0   
+         14                  Argentina               Total population  1972.0   
+         15                  Argentina               Total population  1977.0   
+         16                  Argentina               Total population  1982.0   
+         17                  Argentina               Total population  1987.0   
+         18                  Argentina               Total population  1992.0   
+         19                  Argentina               Total population  1997.0   
+         20                  Argentina               Total population  2002.0   
+         21                  Argentina               Total population  2007.0   
+         22                  Argentina               Total population  2012.0   
+         23                  Argentina               Total population  2015.0   
+         24                  Argentina             Population density  1962.0   
+         25                  Argentina             Population density  1967.0   
+         26                  Argentina             Population density  1972.0   
+         27                  Argentina             Population density  1977.0   
+         28                  Argentina             Population density  1982.0   
+         29                  Argentina             Population density  1987.0   
+         ..                        {\ldots}                            {\ldots}     {\ldots}   
+         360  United States of America             Population density  1972.0   
+         361  United States of America             Population density  1977.0   
+         362  United States of America             Population density  1982.0   
+         363  United States of America             Population density  1987.0   
+         364  United States of America             Population density  1992.0   
+         365  United States of America             Population density  1997.0   
+         366  United States of America             Population density  2002.0   
+         367  United States of America             Population density  2007.0   
+         368  United States of America             Population density  2012.0   
+         369  United States of America             Population density  2015.0   
+         370  United States of America   Gross Domestic Product (GDP)  1962.0   
+         371  United States of America   Gross Domestic Product (GDP)  1967.0   
+         372  United States of America   Gross Domestic Product (GDP)  1972.0   
+         373  United States of America   Gross Domestic Product (GDP)  1977.0   
+         374  United States of America   Gross Domestic Product (GDP)  1982.0   
+         375  United States of America   Gross Domestic Product (GDP)  1987.0   
+         376  United States of America   Gross Domestic Product (GDP)  1992.0   
+         377  United States of America   Gross Domestic Product (GDP)  1997.0   
+         378  United States of America   Gross Domestic Product (GDP)  2002.0   
+         379  United States of America   Gross Domestic Product (GDP)  2007.0   
+         380  United States of America   Gross Domestic Product (GDP)  2012.0   
+         381  United States of America   Gross Domestic Product (GDP)  2015.0   
+         382  United States of America  National Rainfall Index (NRI)  1965.0   
+         383  United States of America  National Rainfall Index (NRI)  1969.0   
+         384  United States of America  National Rainfall Index (NRI)  1974.0   
+         385  United States of America  National Rainfall Index (NRI)  1981.0   
+         386  United States of America  National Rainfall Index (NRI)  1984.0   
+         387  United States of America  National Rainfall Index (NRI)  1992.0   
+         388  United States of America  National Rainfall Index (NRI)  1996.0   
+         389  United States of America  National Rainfall Index (NRI)  2002.0   
+         
+                     Value  
+         0    2.780400e+05  
+         1    2.780400e+05  
+         2    2.780400e+05  
+         3    2.780400e+05  
+         4    2.780400e+05  
+         5    2.780400e+05  
+         6    2.780400e+05  
+         7    2.780400e+05  
+         8    2.780400e+05  
+         9    2.780400e+05  
+         10   2.780400e+05  
+         11   2.780400e+05  
+         12   2.128800e+04  
+         13   2.293200e+04  
+         14   2.478300e+04  
+         15   2.687900e+04  
+         16   2.899400e+04  
+         17   3.132600e+04  
+         18   3.365500e+04  
+         19   3.583400e+04  
+         20   3.788900e+04  
+         21   3.997000e+04  
+         22   4.209500e+04  
+         23   4.341700e+04  
+         24   7.656000e+00  
+         25   8.248000e+00  
+         26   8.913000e+00  
+         27   9.667000e+00  
+         28   1.043000e+01  
+         29   1.127000e+01  
+         ..            {\ldots}  
+         360  2.214000e+01  
+         361  2.317000e+01  
+         362  2.430000e+01  
+         363  2.549000e+01  
+         364  2.678000e+01  
+         365  2.834000e+01  
+         366  2.995000e+01  
+         367  3.132000e+01  
+         368  3.202000e+01  
+         369  3.273000e+01  
+         370  6.050000e+11  
+         371  8.620000e+11  
+         372  1.280000e+12  
+         373  2.090000e+12  
+         374  3.340000e+12  
+         375  4.870000e+12  
+         376  6.540000e+12  
+         377  8.610000e+12  
+         378  1.100000e+13  
+         379  1.450000e+13  
+         380  1.620000e+13  
+         381  1.790000e+13  
+         382  9.285000e+02  
+         383  9.522000e+02  
+         384  1.008000e+03  
+         385  9.492000e+02  
+         386  9.746000e+02  
+         387  1.020000e+03  
+         388  1.005000e+03  
+         389  9.387000e+02  
+         
+         [390 rows x 4 columns]
+\end{Verbatim}
+            
+    Display all the unique values in your new dataframe for these columns:
+\texttt{Area}, \texttt{Variable\ Name}, and \texttt{Year}.
+
+Note the Countries and the Metrics (ie.recorded variables) represented
+in your dataset. \emph{Hint: Use .unique( ) method.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Variable Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{n}{df1}\PY{p}{[}\PY{n}{name}\PY{p}{]}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Argentina' 'Australia' 'Germany' 'Iceland' 'Ireland' 'Sweden'
+ 'United States of America'] 
+
+['Total area of the country' 'Total population' 'Population density'
+ 'Gross Domestic Product (GDP)' 'National Rainfall Index (NRI)'] 
+
+[1962. 1967. 1972. 1977. 1982. 1987. 1992. 1997. 2002. 2007. 2012. 2014.
+ 2015. 1963. 1970. 1974. 1978. 1984. 1990. 1964. 1981. 1985. 1996. 2001.
+ 1969. 1973. 1979. 1993. 1971. 1975. 1986. 1991. 1998. 2000. 1965. 1983.
+ 1988. 1995.] 
+
+
+    \end{Verbatim}
+
+    Convert the \texttt{Year} column string values to pandas datetime
+objects, where only the year is specified.\\
+\emph{Hint: df1{[}`Year'{]} =
+pd.to\_datetime(pd.Series(df1{[}`Year'{]}).astype(int),format=`\%Y').dt.year}
+
+Run df1.tail() to see part of the result.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{int}\PY{p}{)}\PY{p}{,}\PY{n+nb}{format}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{year}
+          \PY{n}{df1}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}104}]:}                          Area                  Variable Name  Year   Value
+          385  United States of America  National Rainfall Index (NRI)  1981   949.2
+          386  United States of America  National Rainfall Index (NRI)  1984   974.6
+          387  United States of America  National Rainfall Index (NRI)  1992  1020.0
+          388  United States of America  National Rainfall Index (NRI)  1996  1005.0
+          389  United States of America  National Rainfall Index (NRI)  2002   938.7
+\end{Verbatim}
+            
+    \hypertarget{extracting-statistics}{%
+\subsubsection{Extracting Statistics}\label{extracting-statistics}}
+
+    Create a dataframe `dftemp' to store rows where the \texttt{Area} is
+\texttt{Iceland}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{dftemp} \PY{o}{=} \PY{n}{df1}\PY{p}{[}\PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Iceland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{dftemp}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}106}]:}         Area              Variable Name  Year    Value
+          166  Iceland  Total area of the country  1962  10300.0
+          167  Iceland  Total area of the country  1967  10300.0
+          168  Iceland  Total area of the country  1972  10300.0
+          169  Iceland  Total area of the country  1977  10300.0
+          170  Iceland  Total area of the country  1982  10300.0
+\end{Verbatim}
+            
+    Print the years when the National Rainfall Index (NRI) was
+\texttt{\textgreater{}\ 950} or \texttt{\textless{}\ 900} in Iceland
+using the dataframe you created in the previous question.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} \PY{n}{dftemp}\PY{p}{[}\PY{p}{(}\PY{n}{dftemp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Variable Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{National Rainfall Index (NRI)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} 
+                 \PY{o}{\PYZam{}} \PY{p}{(}\PY{p}{(}\PY{n}{dftemp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{950}\PY{p}{)} \PY{o}{|} \PY{p}{(}\PY{n}{dftemp}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{900}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}142}]:}         Area                  Variable Name  Year   Value
+          214  Iceland  National Rainfall Index (NRI)  1967   816.0
+          215  Iceland  National Rainfall Index (NRI)  1971   963.2
+          216  Iceland  National Rainfall Index (NRI)  1975  1010.0
+          218  Iceland  National Rainfall Index (NRI)  1986   968.5
+          219  Iceland  National Rainfall Index (NRI)  1991  1095.0
+          220  Iceland  National Rainfall Index (NRI)  1997   993.2
+\end{Verbatim}
+            
+    Get all the rows of df1 (from the preprocessed data section of this
+notebook) where the \texttt{Area} is
+\texttt{United\ States\ of\ America} and store that into a new dataframe
+called \texttt{df\_usa}. Set the indices of the this dataframe to be the
+\texttt{Year} column.\\
+\emph{Hint: Use .set\_index()}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}149}]:} \PY{n}{df\PYZus{}usa} \PY{o}{=} \PY{n}{df1}\PY{p}{[}\PY{n}{df1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{United States of America}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}149}]:}                           Area              Variable Name     Value
+          Year                                                               
+          1962  United States of America  Total area of the country  962909.0
+          1967  United States of America  Total area of the country  962909.0
+          1972  United States of America  Total area of the country  962909.0
+          1977  United States of America  Total area of the country  962909.0
+          1982  United States of America  Total area of the country  962909.0
+\end{Verbatim}
+            
+    Pivot the dataframe so that the unique \texttt{Variable\ Name} entries
+become the column entries. The dataframe values should be the ones in
+the \texttt{Value} column. Do this by running the lines of code below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{df\PYZus{}usa} \PY{o}{=} \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{pivot}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Variable Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{values}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}150}]:} Variable Name  Gross Domestic Product (GDP)  National Rainfall Index (NRI)  \textbackslash{}
+          Year                                                                         
+          1962                           6.050000e+11                            NaN   
+          1965                                    NaN                          928.5   
+          1967                           8.620000e+11                            NaN   
+          1969                                    NaN                          952.2   
+          1972                           1.280000e+12                            NaN   
+          
+          Variable Name  Population density  Total area of the country  Total population  
+          Year                                                                            
+          1962                        19.93                   962909.0          191861.0  
+          1965                          NaN                        NaN               NaN  
+          1967                        21.16                   962909.0          203713.0  
+          1969                          NaN                        NaN               NaN  
+          1972                        22.14                   962909.0          213220.0  
+\end{Verbatim}
+            
+    Rename the corresponding columns to
+{[}`GDP',`NRI',`PD',`Area',`Population'{]}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NRI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PD}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}151}]:}                GDP    NRI     PD      Area  Population
+          Year                                                  
+          1962  6.050000e+11    NaN  19.93  962909.0    191861.0
+          1965           NaN  928.5    NaN       NaN         NaN
+          1967  8.620000e+11    NaN  21.16  962909.0    203713.0
+          1969           NaN  952.2    NaN       NaN         NaN
+          1972  1.280000e+12    NaN  22.14  962909.0    213220.0
+\end{Verbatim}
+            
+    Print the output of \texttt{df\_usa.isnull().sum()}. This gives us the
+number of NAN values in each column. Replace the NAN values by 0, using
+\texttt{df\_usa=df\_usa.fillna(0)}. Print the output of
+\texttt{df\_usa.isnull().sum()} again.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of NAN values before:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{df\PYZus{}usa}\PY{o}{=}\PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of NAN values after:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of NAN values before:
+ GDP            7
+NRI           11
+PD             7
+Area           7
+Population     7
+dtype: int64
+Number of NAN values after:
+  GDP           0
+NRI           0
+PD            0
+Area          0
+Population    0
+dtype: int64
+
+    \end{Verbatim}
+
+    Calculate and print all the column averages and the column standard
+deviations.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}153}]:} \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}153}]:}                 GDP          NRI         PD           Area     Population
+          count  1.900000e+01    19.000000  19.000000      19.000000      19.000000
+          mean   4.620895e+12   409.273684  16.701579  610314.736842  161513.421053
+          std    6.088656e+12   493.551503  13.554620  478948.168858  131380.538153
+          min    0.000000e+00     0.000000   0.000000       0.000000       0.000000
+          25\%    0.000000e+00     0.000000   0.000000       0.000000       0.000000
+          50\%    1.280000e+12     0.000000  22.140000  962909.000000  213220.000000
+          75\%    7.575000e+12   950.700000  27.560000  962909.000000  265395.500000
+          max    1.790000e+13  1020.000000  32.730000  983151.000000  321774.000000
+\end{Verbatim}
+            
+    Using the \texttt{df\_usa} dataframe, multiply the \texttt{Area} by 10
+(so instead of 1000 ha, the unit becomes 100 ha = 1km\^{}2). Store the
+result in place.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}154}]:} \PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{l+m+mi}{10}
+          \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}154}]:}                GDP    NRI     PD       Area  Population
+          Year                                                   
+          1962  6.050000e+11    0.0  19.93  9629090.0    191861.0
+          1965  0.000000e+00  928.5   0.00        0.0         0.0
+          1967  8.620000e+11    0.0  21.16  9629090.0    203713.0
+          1969  0.000000e+00  952.2   0.00        0.0         0.0
+          1972  1.280000e+12    0.0  22.14  9629090.0    213220.0
+\end{Verbatim}
+            
+    Create a new column in \texttt{df\_usa} called \texttt{GDP/capita} and
+populate it with the calculated GDP per capita. Round the results to two
+decimal points. Store the result in place.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}159}]:} \PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP/capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}159}]:}                GDP    NRI     PD       Area  Population  GDP/capita       PD2
+          Year                                                                         
+          1962  6.050000e+11    0.0  19.93  9629090.0    191861.0  3153324.54  0.019925
+          1965  0.000000e+00  928.5   0.00        0.0         0.0         NaN       NaN
+          1967  8.620000e+11    0.0  21.16  9629090.0    203713.0  4231443.26  0.021156
+          1969  0.000000e+00  952.2   0.00        0.0         0.0         NaN       NaN
+          1972  1.280000e+12    0.0  22.14  9629090.0    213220.0  6003189.19  0.022143
+\end{Verbatim}
+            
+    Create a new column in \texttt{df\_usa} called \texttt{PD2}
+(i.e.~population density 2). Calculate the population density.
+\textbf{Note: the units should be inhab/km\^{}2}. Round the reults to
+two decimal point. Store the result in place.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PD2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{df\PYZus{}usa}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}160}]:}                GDP    NRI     PD       Area  Population  GDP/capita       PD2
+          Year                                                                         
+          1962  6.050000e+11    0.0  19.93  9629090.0    191861.0  3153324.54  0.019925
+          1965  0.000000e+00  928.5   0.00        0.0         0.0         NaN       NaN
+          1967  8.620000e+11    0.0  21.16  9629090.0    203713.0  4231443.26  0.021156
+          1969  0.000000e+00  952.2   0.00        0.0         0.0         NaN       NaN
+          1972  1.280000e+12    0.0  22.14  9629090.0    213220.0  6003189.19  0.022143
+\end{Verbatim}
+            
+    Find the maximum value and minimum value of the `NRI' column in the USA
+(using pandas methods). What years do the min and max values occur in?
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}166}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year of min NRI: =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NRI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{idxmin}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year of max MRI: =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{df\PYZus{}usa}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NRI}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Year of min NRI: = 1962
+Year of max MRI: = 1992
+
+    \end{Verbatim}
+
+    \hypertarget{matplotlib}{%
+\subsection{Matplotlib}\label{matplotlib}}
+
+    Create a dataframe called \texttt{icecream} that has column
+\texttt{Flavor} with entries \texttt{Strawberry}, \texttt{Vanilla}, and
+\texttt{Chocolate} and another column with \texttt{Price} with entries
+\texttt{3.50}, \texttt{3.00}, and \texttt{4.25}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}170}]:} \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Flavor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Strawberry}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vanilla}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chocolate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+m+mf}{3.50}\PY{p}{,} \PY{l+m+mf}{3.00}\PY{p}{,} \PY{l+m+mf}{4.25}\PY{p}{]}\PY{p}{\PYZcb{}}
+          \PY{n}{icecream} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+          \PY{n}{icecream}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}170}]:}        Flavor  Price
+          0  Strawberry   3.50
+          1     Vanilla   3.00
+          2   Chocolate   4.25
+\end{Verbatim}
+            
+    Create a bar chart representing the three flavors and their associated
+prices.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}173}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{bar}\PY{p}{(}\PY{n}{icecream}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Flavor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{icecream}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Price of Ice Cream Flavors}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+           
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_80_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Create 9 random plots. The top three should be scatter plots (one with
+green dots, one with purple crosses, and one with blue triangles. The
+middle three graphs should be a line graph, a horizontal bar chart, and
+a histogram. The bottom three graphs should be trignometric functions
+(one sin, one cosine, one tangent).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}263}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+          
+          \PY{n}{data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{normal}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{41}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{beta}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}\PY{p}{,} \PY{p}{\PYZcb{}}
+          \PY{n}{plot\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+          \PY{n}{bar\PYZus{}data} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Names}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{one}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{two}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{three}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Values}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{)}
+          
+          \PY{k}{def} \PY{n+nf}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+              \PY{k}{return} \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}row 1}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{331}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{green}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{)}\PY{p}{;} \PY{n}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{332}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{purple}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{333}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{marker}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;} \PY{n}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}row 2}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{334}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{;} \PY{n}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{335}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{barh}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{random}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{336}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{;} \PY{n}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}row3}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{337}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{338}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{339}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{tan}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{col1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{;} \PY{n}{hide\PYZus{}labels}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_82_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{extra-credit}{%
+\subsection{Extra Credit}\label{extra-credit}}
+
+    Run the cell below to read in the data. See:
+https://www.quantshare.com/sa-43-10-ways-to-download-historical-stock-quotes-data-for-free
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{df\PYZus{}google} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://finance.google.com/finance/historical?output=csv\PYZam{}q=goog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}apple} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://finance.google.com/finance/historical?output=csv\PYZam{}q=aapl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{df\PYZus{}disney} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://finance.google.com/finance/historical?output=csv\PYZam{}q=dis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}nike}\PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://finance.google.com/finance/historical?output=csv\PYZam{}q=nke}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{df\PYZus{}apple}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Show a 3 x 3 correlation matrix for Nike, Apple, and Disney stock prices
+for the month of July, 2017.
+
+Hint: Convert \texttt{Date} to a pandas datetime object. Change the
+indices of all the dataframes to \texttt{Date}. Use \texttt{Date}
+indices to filter rows. Create a new dataframe that stores values of the
+\texttt{Close} column from each dataframe. Use the \texttt{Close} column
+of each company's stock data to find the correlation using df.corr().
+
+    Show the same correlation matrix but over different time periods. 1. the
+last 20 days\\
+2. the last 80 days
+
+    Change the code so that it accepts a list of any stock symbols (i.e.
+{[}`NKE', `APPL', `DIS', \ldots{} {]}) and creates a correlation matrix
+for the past 100 days.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
